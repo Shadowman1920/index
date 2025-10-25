@@ -7,11 +7,11 @@
 <i>Dinamikus algoritmus/programozás</i>
 <br>
 <br>
-<a href="dinamikus_programozas.html">
+<a href="moho_programozas.html">
 <img src="https://www.onismeret-tehetseggondozas.hu/wp-content/uploads/success-coaching.jpg" align="center">
 <i>Mohó algoritmus/programozás</i>
 <br>
 <br>
-<a href="dinamikus_programozas.html">
+<a href="rekurziv_programozas.html">
 <img src="https://www.onismeret-tehetseggondozas.hu/wp-content/uploads/success-coaching.jpg" align="center">
-<i>Rekurzió algoritmus/programozás</i>
+<i>Rekurzív algoritmus/programozás</i>
