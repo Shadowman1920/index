@@ -1,0 +1,147 @@
+<head>
+  <style>
+    body {
+      background-color: #C2DFFF;
+      font-family: Tahoma, Geneva, sans-serif;
+    }
+    pre {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<b>Mi is az a rekurzív programozás?</b>
+<br>
+<br>
+
+<p style="text-align: justify;">A dinamikus programozás elnevezés egy számítógépes programozás során használt problémamegoldási módszert jelöl, aminek lényege, hogy egy nagyobb problémát kisebb, egymástól nem független részproblémákra bontunk, és a részproblémák megoldásait eltároljuk, hogy ismétlődés esetén ne kelljen újraszámolni őket.
+</p>
+<p>
+  <i>Forrás:</i> 
+  <a href="https://lexiq.hu/dinamikus-programozas" target="_blank">
+    Lexiq
+  </a>
+</p>
+<p style="text-align: justify;">Ennek a programozási módnak a bemutatására a Nemes Tihamér Nemzetközi Informatikai Tanulmányi Verseny 1995-99-ös Versenyfeladatok II. kötetét használtam.
+</p>
+<p style="text-align: justify;">A 40. oldalon található 1986-os ötödik és nyolcadik évfolyamnak szánt Sportverseny feladatot találtam megfelelőnek:<br>
+<br>
+<i>Az alábbi Logo programrészletek köröket rajzolnak különböző elrendezésben. A kör 10 eljáráshívás 10 egység sugarú kört rajzol, az aktuális pontot véve középpontnak. A rajzolás elején a teknőc
+északi irányba néz, a toll a levegőben van, a kör eljárás a körvonal rajzolása előtt leteszi a tollat, a
+végén pedig újra felemeli. Rajzolás után a teknőc visszaáll eredeti pozíciójába és irányába. Az
+előre t utasítás hatására a teknőc az aktuális irányba előre lép t egységgel, a jobbra sz
+hatására pedig jobbra fordul sz fokkal. Az ismétlés db [utasítások] hatására a záró-
+jelbe tett utasításokat db-szer megismétli.
+<br><br>
+Példa:
+<br><br>kör 10 előre 10 kör 20 eredménye:<br><br>
+Melyik programrészlet mit rajzol?<br><br>
+A. ismétlés 4 [kör 10 előre 20 jobbra 90]<br>
+B. ismétlés 3 [kör 10 előre 20 jobbra 120]<br>
+C. ismétlés 4 [kör 10 előre 10 jobbra 90]<br>
+D. ismétlés 4 [kör 10 előre 15 jobbra 90]<br>
+E. jobbra 90 ismétlés 2 [kör 10 előre 15] <br>kör 10
+jobbra 120 előre 15 kör 10 jobbra <br>60 előre 15
+kör 10 előre 15</i></p>
+
+Íme az én megoldásom Pythonban. 
+
+A. feladat 
+<pre><code>
+import turtle
+
+def kor(r):
+    turtle.pendown()
+    for _ in range(10):
+        turtle.circle(r, 36)
+    turtle.penup()
+
+def rekurziv_rajz(db, r, elore, jobbra):
+    if db == 0:
+        return
+    kor(r)
+    turtle.forward(elore)
+    turtle.right(jobbra)
+    rekurziv_rajz(db - 1, r, elore, jobbra)
+
+def main():
+    turtle.speed(2)
+    turtle.penup()
+    turtle.setheading(90)
+    
+    # A
+    turtle.goto(-300, 0)
+    rekurziv_rajz(4, 10, 20, 90)
+
+    # B
+    turtle.goto(-150, 0)
+    rekurziv_rajz(3, 10, 20, 120)
+
+    # C
+    turtle.goto(0, 0)
+    rekurziv_rajz(4, 10, 10, 90)
+
+    # D
+    turtle.goto(150, 0)
+    rekurziv_rajz(4, 10, 15, 90)
+
+    # E
+    turtle.goto(300, 0)
+    rajz_E()
+
+    turtle.hideturtle()
+    turtle.done()
+
+def rajz_E():
+    turtle.right(90)
+    for _ in range(2):
+        kor(10)
+        turtle.forward(15)
+    kor(10)
+    turtle.right(120)
+    turtle.forward(15)
+    kor(10)
+    turtle.right(60)
+    turtle.forward(15)
+    kor(10)
+    turtle.forward(15)
+
+if __name__ == "__main__":
+    main()
+
+<br></code></pre>
+
+<p style="text-align: justify;">A fenti kódban egyszerre valósul meg az adott feladat összes köre. Először is szükség van a program elején a teknős (turtle) meghívására. Ez teszi lehetővé, hogy rajzolni tudjunk. 
+
+<br><br>Most pedig nézzük át tételesen melyik függvény mit is csinál:<br>
+<br>A <code style="font-size: 130%;">def kor</code> függvény teszi lehetővé, hogy egy adott kört rajzoljunk majd. A 10-es számérték lehet több és kevesebb is, de talán ez az opcionálisan a legjobb. Ez a 10 körív szakasz ad ki legjobban kört. Ha ettől kevesebb lenne, akkor töredezett lenne a kör. Több esetén pedig a memória használat nőne.
+<br><br>
+A <code style="font-size: 130%;">rekurziv_rajz (db, r, elore, jobbra)</code> itt jelenik meg a rekurzív függvény. Ez az ami meghívja a megfelelő paramétereket és az adott feladatnak megfelelően rajzolja a köröket. Zárójelben vannak azok a paraméterek, amelyeket a feladatban az adott résznél kaptunk. Ezeket olvassa be, majd ez alapján rajzolja le azokat.
+<br><br>
+A <code style="font-size: 130%;">main()</code> ez a rész a program fő függvénye. Ez hívja meg a feladatnak megfelelően az adatokat. Illetve itt határzozza meg a <i>teknőc</i> helyét is.
+<br><br>
+A <code style="font-size: 130%;">rajz_E()</code> kódrészlet az E feladatnak megfelelően rajzolja le az adott paraméterek alaján az ábrát. Ugye ez a feladat komplexebb mint az előzők.
+<br><br>
+Ha külön nézzük a feladatokat, akkor elmondható a következő:
+<br><br>
+<i>A</i> feladat - 4x ismétlődik a kör, aminek a sugara 10 egység, a körök 20 egységre vannak egymástól. 90°-os eltolódással.
+<br><br>
+<i>B</i> feladat - hasonlóan az előzőhőz, különbség, hogy csak 3 kör valósul meg, amelyek egymástól 120°-ra vannak.
+<br><br>
+<i>C</i> feladat - ismételten 4 kör valósul meg, azzal a különbséggel, az A feladathoz, hogy itt a körök közötti távolság 10-re csökkent.
+<br><br>
+<i>D</i> feladat - itt ugyanaz mint a C esetén, csak a körök közötti távolság 15.
+<br><br>
+<i>E</i> feladat - itt pedig az első 3 kör egymás mellett helyezkednek el, és úniót alkotnak. A második sorban lévő körök pedig a fentiekhez képest 10/15 egységre vannak.
+</p>
+
+
+<!-- házikó -->
+<a href="index.html">
+  <img src="https://cdn.pixabay.com/photo/2016/03/30/00/23/icon-1289758_640.png" alt="Vissza a főoldalra" style="width: 64px; height: 64px; display: block; margin: 20px auto;">
+</a>
