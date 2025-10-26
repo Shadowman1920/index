@@ -1,7 +1,25 @@
+<head>
+  <style>
+    body {
+      background-color: #C2DFFF;
+      font-family: Tahoma, Geneva, sans-serif;
+    }
+    pre {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+
 <b>Mi is az a mohó-programozás?</b> 
 <br>
-
-Optimalizálási probléma megoldására szolgáló algoritmus gyakran olyan lépések sorozatából áll, ahol minden lépésben adott
+<br>
+<p style="text-align: justify;">Optimalizálási probléma megoldására szolgáló algoritmus gyakran olyan lépések sorozatából áll, ahol minden lépésben adott
 halmazból választhatunk. Sok optimalizálási probléma esetén a dinamikus programozási megoldás túl sok esetet vizsgál annak
 érdekében, hogy az optimális választást meghatározza. Ennél egyszer˝ubb, hatékonyabb algoritmus is létezik. A mohó algoritmus
 mindig az adott lépésben optimálisnak látszó választást teszi. Vagyis, a lokális optimumot választja abban a reményben, hogy ez
@@ -10,11 +28,44 @@ Mohó algoritmus nem mindig ad optimális megoldást, azonban sok probléma mego
 olyan egyszerű, de nem triviális problémát vizsgálunk, az esemény-kiválasztás problémáját, amelyre a mohó algoritmus hatékony
 megoldást ad. A mohó algoritmushoz úgy jutunk, hogy eloször dinamikus programozási megoldást adunk, aztán megmutatjuk, ˝
 hogy a mohó választás mindig optimális megoldást eredményez. Ezután áttekintjük a mohó stratégia elemeit, ami mohó algoritmusok helyességének közvetlenebb bizonyítását teszi lehetové.
+</p>
 <p>
-  Forrás: 
+  <i>Forrás:</i> 
   <a href="http://www.inf.u-szeged.hu/~tnemeth/jegyz/moho.pdf" target="_blank">
     www.inf.u-szeged.hu
   </a>
 </p>
+<p style="text-align: justify;">Ennek a programozási módnak a bemutatására a Nemes Tihamér Nemzetközi Informatikai Tanulmányi Verseny 1995-99-ös Versenyfeladatok II. kötetét használtam.
+</p>
+<p style="text-align: justify;">A 40. oldalon található 1986-os ötödik és nyolcadik évfolyamnak szánt Sportverseny feladatot találtam megfelelőnek:<br>
+<br>
+<i>Egy kosárlabda csapatnak 5, egy kézilabda csapatnak pedig 7 tagja van. Egy osztály N (&ge;5) tanulóját
+úgy szeretnénk csapatokra osztani, hogy senki se szerepeljen egynél több csapatban, s a lehető legkevesebben maradjanak ki (például egy 18 fős osztályból 2 kosárlabda és 1 kézilabda csapatot szervezünk, mert így csak egyetlen tanuló marad ki, 19 fős osztály esetén azonban már 2 kézilabda és 1
+kosárlabda csapatot kell szervezni). Készíts programot, amely beolvassa egy osztály létszámát, majd kiírja, hogy belőlük hány kosárlabda és hány kézilabda csapatot szervezzünk, valamint, hogy hányan maradnak ki a csapatokból!
+(Ha több megoldás lenne, akkor is elég egyet - bármelyiket - megadni.)</i></p>
 
+Íme az én megoldásom Pythonban. 
 
+<pre><code>
+# Beolvassuk az osztály létszámát
+n = int(input("Add meg az osztály létszámát: "))
+
+# Kézilabda csapatok (7 fősek)
+kezicsapat = n // 7
+maradek = n % 7
+
+# Megnézzük, a maradékból hány kosárlabda (5 fős) csapatot lehet még kihozni
+kosarcsapat = maradek // 5
+maradek = maradek % 5
+
+# Eredmények kiírása
+print("Kézilabda csapatok száma:", kezicsapat)
+print("Kosárlabda csapatok száma:", kosarcsapat)
+print("Kimaradó tanulók száma:", maradek)
+<br></code></pre>
+
+<p style="text-align: justify;">A feladat egyszerűen megoldható. Először is felhasználótól bekéri a program a tanulói létszámot, majd a kapott számot először az adott létszámot osztja el 7-el (ugye a képzilabda csapat létszáma). Ez az osztás van jelölve "//" jellel, ami megfelel, a mindennapokban használt osztásnak valahol. Ilyenkor csak egész értéket kapunk. Majd a maradékot a következő osztással "%" kapjuk meg. Ilyenkor derül ki, hogy pontosan mennyi gyerek számára nem lesz csapat kézilabda csapat.
+
+Ez után a megmaradt számmal ugyanúgy jár a kosárcsapat esetén is.
+<br><br>
+Ha itt sem tud "mit kezdeni" az adott létszámmal, akkor a kapott számot pedig megjelenteti, mint tanulók száma, amelyek csapat nélkül maradtak.</p>
