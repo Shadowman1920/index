@@ -30,7 +30,83 @@ eltároljuk, hogy ismétlődés esetén ne kelljen újraszámolni őket.
     Lexiq
   </a>
 </p>
+<p style="text-align: justify;">
+  Ennek a programozási módnak a bemutatására a Neuman János Számítógépes Társaság által szervezett 
+  Közép-Európai Informatikai Diákolimpia 1994-es, 
+  második napi első feladatát találtam megfelelőnek. A feladat címe: Fekete vagy fehér.
+</p>
+Példa:
+<br>
+<p style="text-align: justify;">
+Írj programot, amely beolvas három pozitív egészet (n,p,q). 
+Döntsd el, létezik-e olyan n darab egész számból álló számsorozat, 
+amelyben bármely <i>p</i> egymást követő elem összege pozitív és 
+bármely <i>q</i> egymást követő elem összege pedig negatív!
+Ha a válasz <i>IGEN</i>, akkor programodnak meg kell határoznia 
+egy ilyen sorozatot. Az n,  p, q értékét billentyűzetről olvasd be! 
+Az output tartalmazza a <i>YES</i> vagy a <i>NO</i> szavak valamelyikét, 
+s ezt kövesse <i>YES</i> esetén az <i>n</i> elemű, egészekből álló sorozat! 
+Az eredményt a képernyőre kell írni! Az <i>n</i> értéke legfeljebb 50 lehet, 
+a program időkorlátja 1 perc.</p>
 
+<pre><code>
+def helyes_sorozat(sorozat, p, q):
+    n = len(sorozat)
+    for i in range(n - p + 1):
+        if sum(sorozat[i:i + p]) <= 0:
+            return False
+    for i in range(n - q + 1):
+        if sum(sorozat[i:i + q]) >= 0:
+            return False
+    return True
+
+def keres(n, p, q, sorozat, lehetosegek):
+    if len(sorozat) == n:
+        if helyes_sorozat(sorozat, p, q):
+            return sorozat
+        else:
+            return None
+    for ertek in lehetosegek:
+        uj_sorozat = sorozat + [ertek]
+        eredmeny = keres(n, p, q, uj_sorozat, lehetosegek)
+        if eredmeny is not None:
+            return eredmeny
+    return None
+
+# Bekérés a felhasználótól
+n = int(input("Hány elemű legyen a sorozat? (n): "))
+p = int(input("Mennyi legyen a pozitív részösszeg hossza? (p): "))
+q = int(input("Mennyi legyen a negatív részösszeg hossza? (q): "))
+
+lehetosegek = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
+
+megoldas = keres(n, p, q, [], lehetosegek)
+
+if megoldas:
+    print("YES")
+    print(*megoldas)
+else:
+    print("NO")
+
+</pre></code>
+
+Íme egy kis magyarázat a feladathoz:
+<br><br>
+A kód első két függvénye megnézi, hogy az adott feltételek érvényesülnek-e. Értsd, p esetén az összeg pozitív értéket ad, míg q részben negatívat. 
+Ha ezek az állítások nem teljesülnek, akkor hibával (<i>false</i>) értékkel tér vissza.
+<br><br>
+A további részben a felhasználótól kérünk be adatot az <i>n</i>, <i>p</i>, <i>q</i> értékre.
+<br><br>
+Ez után következő "lehetőségek" részben megadjuk azt a számsort, amelyekből a program válogathat. Ezt futtatás előtt tudjuk módosítani.
+<br><br>
+A további megoldás és if/else résznél a megoldás számsor meghatározás, majd pedig a helyes és helytelen ismertetése jelenik meg.
+<br><br>
+Egy példa, ha beolvasáskor például a 6, 5, 3 kombinációt adjuk meg, akkor a számsor -3 5 -3 -3 5 -3 lesz. 
+Ez a számsor megfelel a feltételnek. Miért? Mert először is 6 elemű sorozatot kaptunk ez &#10004;, aztán 
+Ez után olyan 5 számot kell összeállítani, amelyeket ha összeadunk, akkor pozitív összeget kapunk.
+A mi esetünkben -3, 5, -3, -3, 5 = 1, a másik ötös számsor 5, -3, -3, 5, -3 szintén pozitív (1) értéket ad. Tehát &#10004;.
+Aztán a harmadik feltétel is teljesül, mert ha a számsorban hármassával adjuk össze a számokat, mindig negatív számot kapunk. 
+-3, 5, -3, aztán 5, -3, -3 és így tovább mindig negatív értéket kapunk. Tehát a harmadik feltétel is &#10004;.
 
 
 
