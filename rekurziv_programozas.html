@@ -19,17 +19,26 @@
 <br>
 <br>
 
-<p style="text-align: justify;">A dinamikus programozás elnevezés egy számítógépes programozás során használt problémamegoldási módszert jelöl, aminek lényege, hogy egy nagyobb problémát kisebb, egymástól nem független részproblémákra bontunk, és a részproblémák megoldásait eltároljuk, hogy ismétlődés esetén ne kelljen újraszámolni őket.
+<p style="text-align: justify;">
+  A rekurzió egy programozási technika, 
+  amelyben egy függvény saját magát hívja meg, 
+  hogy végrehajtson egy feladatot. Az alapelv az, 
+  hogy a problémát kisebb, egyszerűbb részekre bontjuk, 
+  és ezeket a részeket egy-egy rekurzív hívásban oldjuk meg.
+   A rekurzió alapja a problémák dekompozíciója: 
+   amikor egy nagy problémát kisebb részfeladatokra bontunk, 
+   akkor a nagyobb problémák megoldása gyakran ugyanazokat a lépéseket igényli, 
+   mint a kisebbek.
 </p>
 <p>
   <i>Forrás:</i> 
-  <a href="https://lexiq.hu/dinamikus-programozas" target="_blank">
-    Lexiq
+  <a href="https://blog.silverpc.hu/2025/02/05/rekurzio-a-programozasban-miert-fontos-es-hogyan-alkalmazzuk-hatekonyan/" target="_blank">
+    SilverPC
   </a>
 </p>
 <p style="text-align: justify;">Ennek a programozási módnak a bemutatására a Nemes Tihamér Nemzetközi Informatikai Tanulmányi Verseny 1995-99-ös Versenyfeladatok II. kötetét használtam.
 </p>
-<p style="text-align: justify;">A 40. oldalon található 1986-os ötödik és nyolcadik évfolyamnak szánt Sportverseny feladatot találtam megfelelőnek:<br>
+<p style="text-align: justify;">A 67. oldalon található 1998-as ötödik és nyolcadik évfolyamnak szánt Karikák feladatot találtam megfelelőnek:<br>
 <br>
 <i>Az alábbi Logo programrészletek köröket rajzolnak különböző elrendezésben. A kör 10 eljáráshívás 10 egység sugarú kört rajzol, az aktuális pontot véve középpontnak. A rajzolás elején a teknőc
 északi irányba néz, a toll a levegőben van, a kör eljárás a körvonal rajzolása előtt leteszi a tollat, a
@@ -39,7 +48,7 @@ hatására pedig jobbra fordul sz fokkal. Az ismétlés db [utasítások] hatás
 jelbe tett utasításokat db-szer megismétli.
 <br><br>
 Példa:
-<br><br>kör 10 előre 10 kör 20 eredménye:<br><br>
+<br><br>
 Melyik programrészlet mit rajzol?<br><br>
 A. ismétlés 4 [kör 10 előre 20 jobbra 90]<br>
 B. ismétlés 3 [kör 10 előre 20 jobbra 120]<br>
